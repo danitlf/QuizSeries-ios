@@ -15,7 +15,7 @@ class SerieTableViewCell: UITableViewCell {
     @IBOutlet weak var serieImage: UIImageView!
     
     override func awakeFromNib() {
-        super.awakeFromNib()
+        super.awakeFromNib()  
         // Initialization code
     }
 
