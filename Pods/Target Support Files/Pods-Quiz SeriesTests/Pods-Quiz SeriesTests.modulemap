@@ -1,0 +1,6 @@
+framework module Pods_Quiz_SeriesTests {
+  umbrella header "Pods-Quiz SeriesTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
