@@ -11,7 +11,7 @@ import UIKit
 class ListSeriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableSeries: UITableView!
-    var listSeries: [Serie] = []
+    var listSeries: [Serie] = [Serie]()
     let serieApi = SeriesAPI()
 
     override func viewDidLoad() {
@@ -20,9 +20,15 @@ class ListSeriesViewController: UIViewController, UITableViewDataSource, UITable
         tableSeries.dataSource = self
         tableSeries.separatorStyle = .none
         
-        self.serieApi.loadListOfSeries() {
-            self.listSeries =  self.serieApi.allSeries
-            self.tableSeries.reloadData()
+        UINavigationBar.appearance().barTintColor = hexStringToUIColor(hex: "#ffffff")
+        UINavigationBar.appearance().isTranslucent = true
+        
+        if self.listSeries.count < 1 {
+            print("entrou aqui")
+            self.serieApi.loadListOfSeries() {
+                self.listSeries =  self.serieApi.allSeries
+                self.tableSeries.reloadData()
+            }
         }
         
 

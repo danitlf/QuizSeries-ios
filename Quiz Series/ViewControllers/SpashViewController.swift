@@ -9,6 +9,8 @@
 import UIKit
 
 class SpashViewController: UIViewController {
+    
+    let serieApi = SeriesAPI()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +20,26 @@ class SpashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         //if already have a user saved go to list of series
-        if User().getUserDefaults() != nil {
-            performSegue(withIdentifier: "ListSegueFromSplash" , sender: nil)
+        if User().getUserDefaults() == nil {
+            self.serieApi.loadListOfSeries() {
+                self.performSegue(withIdentifier: "ListSegueFromSplash" , sender: self.serieApi.allSeries)
+            }
         }
         else {
             performSegue(withIdentifier: "EnterSegueFromSplash", sender: nil)
         }
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ListSegueFromSplash" {
+            if let listSeriesViewController = segue.destination as? ListSeriesViewController {
+                listSeriesViewController.listSeries = sender as! [Serie]
+            }
+        }
+    }
+    
+
 
     /*
     // MARK: - Navigation

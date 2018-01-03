@@ -22,6 +22,8 @@
 		3321AA461FF9789A00EC90DC /* ListSeriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321AA451FF9789900EC90DC /* ListSeriesViewController.swift */; };
 		3321AA481FFADF7700EC90DC /* Serie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321AA471FFADF7700EC90DC /* Serie.swift */; };
 		3321AA4A1FFAF7C200EC90DC /* SerieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321AA491FFAF7C200EC90DC /* SerieTableViewCell.swift */; };
+		3321AA4C1FFB308A00EC90DC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321AA4B1FFB308A00EC90DC /* Utils.swift */; };
+		33325A9C1FFC914900125977 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33325A9B1FFC914900125977 /* GoogleService-Info.plist */; };
 		896168168DC9663D05B87403 /* Pods_Quiz_SeriesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6D32009697A43AD8BAADF0 /* Pods_Quiz_SeriesTests.framework */; };
 		AC891EAB547BE80E0575BEEA /* Pods_Quiz_SeriesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFEE80CC5FA7F52541FE667 /* Pods_Quiz_SeriesUITests.framework */; };
 		BB012AD259A2860FCC75F970 /* Pods_Quiz_Series.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BF7886FD3FCC96E94F7ED6 /* Pods_Quiz_Series.framework */; };
@@ -67,6 +69,8 @@
 		3321AA451FF9789900EC90DC /* ListSeriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSeriesViewController.swift; sourceTree = "<group>"; };
 		3321AA471FFADF7700EC90DC /* Serie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serie.swift; sourceTree = "<group>"; };
 		3321AA491FFAF7C200EC90DC /* SerieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieTableViewCell.swift; sourceTree = "<group>"; };
+		3321AA4B1FFB308A00EC90DC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		33325A9B1FFC914900125977 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		445F2C5FF4956A6C0770CA37 /* Pods-Quiz SeriesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiz SeriesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quiz SeriesTests/Pods-Quiz SeriesTests.release.xcconfig"; sourceTree = "<group>"; };
 		58BF7886FD3FCC96E94F7ED6 /* Pods_Quiz_Series.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_Series.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B6D32009697A43AD8BAADF0 /* Pods_Quiz_SeriesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_SeriesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,12 +149,14 @@
 			children = (
 				331BB1761FF5EE5800CA815F /* AppDelegate.swift */,
 				3321AA411FF8479D00EC90DC /* Constants.swift */,
+				3321AA4B1FFB308A00EC90DC /* Utils.swift */,
 				3321AA3C1FF745BD00EC90DC /* Models */,
 				3321AA3B1FF745A600EC90DC /* Services */,
 				3321AA3A1FF73CC200EC90DC /* ViewControllers */,
 				331BB17A1FF5EE5800CA815F /* Main.storyboard */,
 				331BB1801FF5EE5800CA815F /* Assets.xcassets */,
 				331BB1851FF5EE5800CA815F /* Info.plist */,
+				33325A9B1FFC914900125977 /* GoogleService-Info.plist */,
 				331BB17D1FF5EE5800CA815F /* Quiz_Series.xcdatamodeld */,
 			);
 			path = "Quiz Series";
@@ -331,6 +337,7 @@
 			files = (
 				331BB1811FF5EE5800CA815F /* Assets.xcassets in Resources */,
 				331BB17C1FF5EE5800CA815F /* Main.storyboard in Resources */,
+				33325A9C1FFC914900125977 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,12 +408,16 @@
 		};
 		75BDE68A8096859BB71C6A39 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Quiz Series/Pods-Quiz Series-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -415,6 +426,10 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -524,6 +539,7 @@
 				3321AA391FF73CB700EC90DC /* RegisterViewController.swift in Sources */,
 				3321AA3E1FF7496300EC90DC /* SeriesAPI.swift in Sources */,
 				3321AA461FF9789A00EC90DC /* ListSeriesViewController.swift in Sources */,
+				3321AA4C1FFB308A00EC90DC /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

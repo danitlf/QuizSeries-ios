@@ -10,6 +10,10 @@ target 'Quiz Series' do
   pod 'Firebase/Core'
   pod 'Kingfisher', '~> 4'
   pod 'SwiftyJSON'
+  pod 'Firebase/Auth'
+  pod 'Bolts'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
 
   target 'Quiz SeriesTests' do
     inherit! :search_paths
