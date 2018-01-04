@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKCoreKit
 
 class SpashViewController: UIViewController {
     
@@ -20,7 +21,7 @@ class SpashViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         //if already have a user saved go to list of series
-        if User().getUserDefaults() == nil {
+        if FBSDKAccessToken.current() != nil {
             self.serieApi.loadListOfSeries() {
                 self.performSegue(withIdentifier: "ListSegueFromSplash" , sender: self.serieApi.allSeries)
             }

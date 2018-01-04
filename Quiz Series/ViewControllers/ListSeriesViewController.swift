@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import FBSDKCoreKit
 
 class ListSeriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var imagePerfil: UIImageView!
     @IBOutlet weak var tableSeries: UITableView!
     var listSeries: [Serie] = [Serie]()
     let serieApi = SeriesAPI()
@@ -19,6 +21,9 @@ class ListSeriesViewController: UIViewController, UITableViewDataSource, UITable
         tableSeries.delegate = self
         tableSeries.dataSource = self
         tableSeries.separatorStyle = .none
+        
+        self.imagePerfil.layer.cornerRadius = self.imagePerfil.frame.width/2
+        self.imagePerfil.clipsToBounds = true
         
         UINavigationBar.appearance().barTintColor = hexStringToUIColor(hex: "#ffffff")
         UINavigationBar.appearance().isTranslucent = true
@@ -31,8 +36,27 @@ class ListSeriesViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
         
+        getFBUserData()
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    func getFBUserData()
+    {
+        
+        if((FBSDKAccessToken.current()) != nil){
+            FBSDKGraphRequest(graphPath: "me",
+                              parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email , gender"]).start(
+                                completionHandler: { (connection, result, error) -> Void in
+                                    if (error == nil){
+                                        let data = result as! [String : AnyObject]
+                                        let FBid = data["id"] as? String
+                                        let url = NSURL(string: "https://graph.facebook.com/\(FBid!)/picture?type=large&return_ssl_resources=1")
+                                        self.imagePerfil.image = UIImage(data: NSData(contentsOf: url! as URL)! as Data)
+
+                                    }})
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
