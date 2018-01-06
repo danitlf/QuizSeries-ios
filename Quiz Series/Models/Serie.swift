@@ -13,4 +13,5 @@ struct Serie: Codable {
     var label: String
     var cor: String
     var url_icon: String
+    var fase_count: Int
 }

@@ -15,6 +15,8 @@ class ListSeriesViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableSeries: UITableView!
     var listSeries: [Serie] = [Serie]()
     let serieApi = SeriesAPI()
+    var selectedSerie: Serie?
+    var imageSerieSelected: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,18 +30,21 @@ class ListSeriesViewController: UIViewController, UITableViewDataSource, UITable
         UINavigationBar.appearance().barTintColor = hexStringToUIColor(hex: "#ffffff")
         UINavigationBar.appearance().isTranslucent = true
         
+        //if dont come of splash screen direct
         if self.listSeries.count < 1 {
-            print("entrou aqui")
             self.serieApi.loadListOfSeries() {
                 self.listSeries =  self.serieApi.allSeries
                 self.tableSeries.reloadData()
             }
         }
         
+        //push image from facebook
         getFBUserData()
         
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     func getFBUserData()
@@ -66,7 +71,24 @@ class ListSeriesViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SerieCell", for: indexPath) as! SerieTableViewCell
         cell.prepare(with: listSeries[indexPath.row])
+        cell.selectionStyle = .none
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedSerie = self.listSeries[indexPath.row]
+        let currentCell = tableView.cellForRow(at: indexPath) as! SerieTableViewCell!
+        self.imageSerieSelected = currentCell?.serieImage.image
+        self.performSegue(withIdentifier: "SegueToSerie", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToSerie" {
+            if let seriesViewController = segue.destination as? SerieViewController {
+                seriesViewController.serie = self.selectedSerie
+                seriesViewController.logoSerie = self.imageSerieSelected
+            }
+        }
     }
     /*
     // MARK: - Navigation

@@ -24,6 +24,10 @@
 		3321AA4A1FFAF7C200EC90DC /* SerieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321AA491FFAF7C200EC90DC /* SerieTableViewCell.swift */; };
 		3321AA4C1FFB308A00EC90DC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321AA4B1FFB308A00EC90DC /* Utils.swift */; };
 		33325A9C1FFC914900125977 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33325A9B1FFC914900125977 /* GoogleService-Info.plist */; };
+		33325A9E1FFF191200125977 /* LevelScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33325A9D1FFF191200125977 /* LevelScore.swift */; };
+		33325AA0200030B900125977 /* SerieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33325A9F200030B900125977 /* SerieViewController.swift */; };
+		33325AA32001118000125977 /* LevelBlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33325AA22001118000125977 /* LevelBlockTableViewCell.swift */; };
+		33325AA5200111E400125977 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33325AA4200111E400125977 /* Level.swift */; };
 		896168168DC9663D05B87403 /* Pods_Quiz_SeriesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6D32009697A43AD8BAADF0 /* Pods_Quiz_SeriesTests.framework */; };
 		AC891EAB547BE80E0575BEEA /* Pods_Quiz_SeriesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FFEE80CC5FA7F52541FE667 /* Pods_Quiz_SeriesUITests.framework */; };
 		BB012AD259A2860FCC75F970 /* Pods_Quiz_Series.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58BF7886FD3FCC96E94F7ED6 /* Pods_Quiz_Series.framework */; };
@@ -71,6 +75,10 @@
 		3321AA491FFAF7C200EC90DC /* SerieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieTableViewCell.swift; sourceTree = "<group>"; };
 		3321AA4B1FFB308A00EC90DC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		33325A9B1FFC914900125977 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		33325A9D1FFF191200125977 /* LevelScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelScore.swift; sourceTree = "<group>"; };
+		33325A9F200030B900125977 /* SerieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieViewController.swift; sourceTree = "<group>"; };
+		33325AA22001118000125977 /* LevelBlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBlockTableViewCell.swift; sourceTree = "<group>"; };
+		33325AA4200111E400125977 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		445F2C5FF4956A6C0770CA37 /* Pods-Quiz SeriesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Quiz SeriesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Quiz SeriesTests/Pods-Quiz SeriesTests.release.xcconfig"; sourceTree = "<group>"; };
 		58BF7886FD3FCC96E94F7ED6 /* Pods_Quiz_Series.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_Series.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B6D32009697A43AD8BAADF0 /* Pods_Quiz_SeriesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Quiz_SeriesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +161,7 @@
 				3321AA3C1FF745BD00EC90DC /* Models */,
 				3321AA3B1FF745A600EC90DC /* Services */,
 				3321AA3A1FF73CC200EC90DC /* ViewControllers */,
+				33325AA12001113F00125977 /* ViewCells */,
 				331BB17A1FF5EE5800CA815F /* Main.storyboard */,
 				331BB1801FF5EE5800CA815F /* Assets.xcassets */,
 				331BB1851FF5EE5800CA815F /* Info.plist */,
@@ -184,9 +193,9 @@
 			isa = PBXGroup;
 			children = (
 				331BB1781FF5EE5800CA815F /* ViewController.swift */,
-				3321AA491FFAF7C200EC90DC /* SerieTableViewCell.swift */,
 				3321AA381FF73CB700EC90DC /* RegisterViewController.swift */,
 				3321AA451FF9789900EC90DC /* ListSeriesViewController.swift */,
+				33325A9F200030B900125977 /* SerieViewController.swift */,
 				3321AA431FF8616A00EC90DC /* SpashViewController.swift */,
 			);
 			path = ViewControllers;
@@ -205,8 +214,20 @@
 			children = (
 				3321AA3F1FF7C03A00EC90DC /* User.swift */,
 				3321AA471FFADF7700EC90DC /* Serie.swift */,
+				33325AA4200111E400125977 /* Level.swift */,
+				33325A9D1FFF191200125977 /* LevelScore.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		33325AA12001113F00125977 /* ViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				3321AA491FFAF7C200EC90DC /* SerieTableViewCell.swift */,
+				33325AA22001118000125977 /* LevelBlockTableViewCell.swift */,
+			);
+			name = ViewCells;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		C457DDE4377E1F0CD6EBFF01 /* Frameworks */ = {
@@ -532,13 +553,17 @@
 				331BB1791FF5EE5800CA815F /* ViewController.swift in Sources */,
 				3321AA441FF8616A00EC90DC /* SpashViewController.swift in Sources */,
 				3321AA401FF7C03A00EC90DC /* User.swift in Sources */,
+				33325AA32001118000125977 /* LevelBlockTableViewCell.swift in Sources */,
 				3321AA481FFADF7700EC90DC /* Serie.swift in Sources */,
 				3321AA4A1FFAF7C200EC90DC /* SerieTableViewCell.swift in Sources */,
 				331BB1771FF5EE5800CA815F /* AppDelegate.swift in Sources */,
+				33325AA0200030B900125977 /* SerieViewController.swift in Sources */,
 				3321AA421FF8479D00EC90DC /* Constants.swift in Sources */,
 				3321AA391FF73CB700EC90DC /* RegisterViewController.swift in Sources */,
 				3321AA3E1FF7496300EC90DC /* SeriesAPI.swift in Sources */,
 				3321AA461FF9789A00EC90DC /* ListSeriesViewController.swift in Sources */,
+				33325A9E1FFF191200125977 /* LevelScore.swift in Sources */,
+				33325AA5200111E400125977 /* Level.swift in Sources */,
 				3321AA4C1FFB308A00EC90DC /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
