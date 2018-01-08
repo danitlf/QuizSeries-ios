@@ -16,6 +16,10 @@ class SerieViewController: UIViewController, UITableViewDataSource, UITableViewD
     var serie: Serie?
     var logoSerie: UIImage?
     var levels = [Level]()
+    var listOfLevels: [String: LevelFirebase]?
+    let fapiFirebaseAPI = FirebaseAPI()
+    var scoreTotal: Int?
+    
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -29,9 +33,20 @@ class SerieViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableLevels.dataSource = self
         tableLevels.separatorStyle = .none
         
-        let lv = Level(numberFase: 1, score: 0)
-        levels.append(lv)
+        if let numLevels = serie?.fase_count {
+             let levelScore = LevelScore(numOfLevels: numLevels)
+             self.levels = levelScore.generatingLevels()
+        }
         
+        fapiFirebaseAPI.getLevelsOf(idOfSerie: (self.serie?.id)!) { (listOfLevels) in
+            self.listOfLevels = listOfLevels
+            self.tableLevels.reloadData()
+        }
+        
+        fapiFirebaseAPI.getScoreOf(idOfSerie: (self.serie?.id)!) { (score) in
+            self.scoreTotal = score
+            self.tableLevels.reloadData()
+        }
         
     }
     
@@ -60,12 +75,51 @@ class SerieViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //tableviewMethods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
+        if scoreTotal != nil && listOfLevels != nil {
+            return levels.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let score = scoreTotal, let listOfLevels = listOfLevels {
+            if levels[indexPath.row].score > score {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "levelCellBlock", for: indexPath) as! LevelBlockTableViewCell
+                cell.prepare(with: levels[indexPath.row])
+                cell.selectionStyle = .none
+                return cell
+            }
+            else {
+                if let level = listOfLevels["\(levels[indexPath.row].numberFase)"] {
+                    if level.played == true {
+                        //level já jogado
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "levelCellPlayed", for: indexPath) as! LevelPlayedTableViewCell
+                        cell.prepare(with: levels[indexPath.row], score: level.score)
+                        cell.selectionStyle = .none
+                        return cell
+                    }
+                    else {
+                        //level liberado pra jogar
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "levelCell", for: indexPath) as! LevelTableViewCell
+                        cell.prepare(with: levels[indexPath.row])
+                        cell.selectionStyle = .none
+                        cell.boxLevel.backgroundColor = hexStringToUIColor(hex: (self.serie?.cor)!)
+                        return cell
+                    }
+                }
+                else {
+                     //level liberado pra jogar
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "levelCell", for: indexPath) as! LevelTableViewCell
+                    cell.prepare(with: levels[indexPath.row])
+                    cell.selectionStyle = .none
+                    cell.boxLevel.backgroundColor = hexStringToUIColor(hex: (self.serie?.cor)!)
+                    return cell
+                }
+            }
+        }
+        //level bloqueado
         let cell = tableView.dequeueReusableCell(withIdentifier: "levelCellBlock", for: indexPath) as! LevelBlockTableViewCell
-        cell.prepare(with: levels[0])
+        cell.prepare(with: levels[indexPath.row])
         cell.selectionStyle = .none
         return cell
     }

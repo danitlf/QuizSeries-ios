@@ -8,6 +8,7 @@ target 'Quiz Series' do
   # Pods for Quiz Series
   pod 'Alamofire', '~> 4'
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
   pod 'Kingfisher', '~> 4'
   pod 'SwiftyJSON'
   pod 'Firebase/Auth'

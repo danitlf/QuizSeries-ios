@@ -8,15 +8,18 @@
 
 import UIKit
 import FBSDKCoreKit
+import Firebase
 
 class ListSeriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var imagePerfil: UIImageView!
     @IBOutlet weak var tableSeries: UITableView!
+    @IBOutlet weak var userCoinsLabel: UILabel!
     var listSeries: [Serie] = [Serie]()
     let serieApi = SeriesAPI()
     var selectedSerie: Serie?
     var imageSerieSelected: UIImage?
+    let fapiFirebaseAPI = FirebaseAPI()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +43,12 @@ class ListSeriesViewController: UIViewController, UITableViewDataSource, UITable
         
         //push image from facebook
         getFBUserData()
+        
+        fapiFirebaseAPI.observeCoins {
+            self.userCoinsLabel.text = "\(self.fapiFirebaseAPI.coins)"
+        }
+        
+        //fapiFirebaseAPI.saveLevelOfSerie(level: LevelFirebase(score: 0, played: false) , idOfSerie: 1, numberOfLevel: 4)
         
     }
     

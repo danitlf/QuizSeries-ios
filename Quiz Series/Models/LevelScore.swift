@@ -9,8 +9,9 @@
 import Foundation
 
 class LevelScore {
-    var levels = [Int:Int]()
+    var levelsScore = [Int:Int]()
     var numOfLevels: Int = 0
+    
     let baseNumOfQuestionsRightForLevel = 10
     
     init(numOfLevels: Int){
@@ -20,10 +21,27 @@ class LevelScore {
     
     func generatingLevelsScore(){
         var pointsForNext = 0
+        levelsScore[1] = 0
         for i in 1...(self.numOfLevels+1) {
             pointsForNext = pointsForNext + (baseNumOfQuestionsRightForLevel+(i/3))*10
-            levels[i+1] = pointsForNext
+            levelsScore[i+1] = pointsForNext
         }
-        print(levels[10])
+    }
+    
+    func getScore(of level: Int) -> Int{
+        return levelsScore[level]!
+    }
+    
+    func generatingLevels() -> [Level] {
+        var levels = [Level]()
+        if self.numOfLevels != 0{
+            for i in 1...self.numOfLevels{
+                if let score = self.levelsScore[i] {
+                    let l = Level(numberFase: i, score: score)
+                    levels.append(l)
+                }
+            }
+        }
+        return levels
     }
 }

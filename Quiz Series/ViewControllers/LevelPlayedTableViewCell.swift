@@ -1,19 +1,21 @@
 //
-//  LevelBlockTableViewCell.swift
+//  LevelPlayedTableViewCell.swift
 //  Quiz Series
 //
-//  Created by daniel tavares de lima freitas on 06/01/18.
+//  Created by daniel tavares de lima freitas on 08/01/18.
 //  Copyright © 2018 daniel tavares de lima freitas. All rights reserved.
 //
 
 import UIKit
 
-class LevelBlockTableViewCell: UITableViewCell {
+class LevelPlayedTableViewCell: UITableViewCell {
 
+    @IBAction func playAgain(_ sender: Any) {
+        print("jogar novamente")
+    }
     @IBOutlet weak var pontosLabel: UILabel!
-    @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var boxLevel: UIView!
-    
+    @IBOutlet weak var levelLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,9 +27,9 @@ class LevelBlockTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func prepare(with level: Level) {
+    func prepare(with level: Level, score: Int) {
         self.levelLabel.text = "Lv \(level.numberFase)"
-        self.pontosLabel.text = "\(level.score)pts"
+        self.pontosLabel.text = "Score: \(score)pts"
         self.boxLevel.layer.cornerRadius = 10
     }
 

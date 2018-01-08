@@ -11,5 +11,6 @@ import Foundation
 struct Level: Codable {
     var numberFase: Int
     var score: Int
-    
 }
+
+

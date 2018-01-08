@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKCoreKit
+import FirebaseDatabase
 
 class SpashViewController: UIViewController {
     

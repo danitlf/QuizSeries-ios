@@ -9,11 +9,13 @@
 import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
+import FirebaseDatabase
 
 
 class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var imagePerfil: UIImageView!
+    let fapiFirebaseAPI = FirebaseAPI()
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if let error = error {
@@ -36,7 +38,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 return
             }
             else{
-                print("logou no firebase")
+                self.fapiFirebaseAPI.initialCreateFIrebaseUser()
                 self.performSegue(withIdentifier: "loginToListSeriesSegue", sender: nil)
 
             }
