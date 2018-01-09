@@ -27,4 +27,19 @@ class SeriesAPI {
         }
     }
     
+    func getQuestionsOfLevel(levelNumber: Int, idSerie: Int, completed: @escaping ([Question])->()){
+        var allQuestions = [Question]()
+        Alamofire.request(apiUrl+"series/\(idSerie)/questions/\(levelNumber)").responseJSON { (response) in
+            let json: JSON = JSON(response.result.value as Any)
+            if let questions = json["questions"].array {
+                for question in questions {
+                    let questionObject = try! JSONDecoder().decode(Question.self, from: question.rawData())
+                    allQuestions.append(questionObject)
+                    
+                }
+            }
+            completed(allQuestions)
+        }
+    }
+    
 }

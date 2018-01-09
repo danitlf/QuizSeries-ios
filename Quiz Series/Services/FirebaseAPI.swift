@@ -21,8 +21,10 @@ class FirebaseAPI {
     }
     
     func observeCoins(completed: @escaping DownloadComplete){
+        print(id!)
         ref.child(id!).child("coins").observe(.value) { (snapshot) in
             if let coinsFirebase = snapshot.value as? Int {
+                print(coinsFirebase)
                 self.coins = coinsFirebase
                 completed()
             }

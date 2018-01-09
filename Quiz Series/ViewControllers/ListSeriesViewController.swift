@@ -45,6 +45,7 @@ class ListSeriesViewController: UIViewController, UITableViewDataSource, UITable
         getFBUserData()
         
         fapiFirebaseAPI.observeCoins {
+            print(self.fapiFirebaseAPI.coins)
             self.userCoinsLabel.text = "\(self.fapiFirebaseAPI.coins)"
         }
         
